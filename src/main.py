@@ -5,6 +5,7 @@ from selectolax.parser import HTMLParser
 from helpers.utils import save_to_csv
 from helpers.utils import gather_data
 from loguru import logger
+from src.helpers.utils import save_to_duckdb
 
 NUM_PAGES = 51
 
@@ -36,8 +37,10 @@ async def main():
 
     results = [item for sublist in results for item in sublist]
     logger.debug(f"Results: {len(results)}")
+
     # results is a list of dictionaries
     save_to_csv(results)
+    save_to_duckdb()
 
 
 asyncio.run(main())
